@@ -1,0 +1,107 @@
+<h1>{{ currentHero.id ? 'Editar' : 'Añadir' }} Héroe</h1>
+
+<div class="grid">
+    <div class="col-12 sm:col-6">
+        <mat-card>
+            <mat-card-content>
+                <form class="grid" [formGroup]="heroForm">
+                    <mat-form-field class="col-12 sm:col-6">
+
+                        <mat-label>Super héroe</mat-label>
+                            <input 
+                                matInput
+                                type="text"
+                                required 
+                                formControlName="superhero"
+                            >
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12 sm:col-6">
+                        <mat-label>Alter ego</mat-label>
+                            <input 
+                                matInput
+                                type="text"
+                                required 
+                                formControlName="alter_ego"
+                            >
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12">
+                        <mat-label>Primera aparición</mat-label>
+                            <input 
+                                matInput
+                                type="text"
+                                required
+                                formControlName="first_appearance"                           
+                            >
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12">
+                        <mat-label>Personajes</mat-label>
+                            <input 
+                                matInput
+                                type="text"
+                                required         
+                                formControlName="characters"                   
+                            >
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12">
+                        <mat-label>Creador</mat-label>
+                            <mat-select
+                                formControlName="publisher"    
+                                required
+                                >
+                                <mat-option 
+                                    [value]="publisher.id"
+                                    *ngFor="let publisher of publishers">
+                                    {{ publisher.value }}
+                                </mat-option>
+                            </mat-select>                            
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12">
+                        <mat-label>Imagen del super héroe</mat-label>
+                            <input 
+                                matInput
+                                type="text"        
+                                formControlName="alt_img"                   
+                            >
+                    </mat-form-field>
+
+                </form>
+
+                <div class="flex justify-content-evenly">
+                    <button 
+                        mat-button
+                        color="primary"
+                        (click)="onSubmit()"
+                        >
+                        <mat-icon>save</mat-icon>
+                        Guardar
+                    </button>
+
+                    <button 
+                        *ngIf="currentHero.id"
+                        mat-button
+                        color="warn"
+                        (click)="onDelete()"
+                        >
+                        <mat-icon>delete</mat-icon>
+                        Borrar
+                    </button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <div class="col-12 sm:col-6">
+        <mat-card>
+            <img mat-card-image
+                [src]="currentHero | heroImage" 
+                alt="Imagen del héroe"
+                >
+        </mat-card>
+        </div>
+
+    </div>
+</div>
